@@ -138,7 +138,7 @@ const Game = (() => {
                 }
             }
         }
-        board[bestMove[0]][bestMove[1]] = "O";
+        if(bestMove != undefined) board[bestMove[0]][bestMove[1]] = "O";
         renderBoard();           
     }
 
