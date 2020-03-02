@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <h1 class="title">Tic Tac Toe</h1>
+    <div class="start">
+        <div class="choose-mode">
+            <p>Choose Mode</p>
+            <button id="single">Single Player</button>
+            <button id="multi">Multiplayer</button>
+        </div>
+        <div class="choose-difficulty">
+            <p>Choose Difficulty</p>
+            <button id="easy">Easy</button>
+            <button id="hard">Impossible</button>
+        </div>
+        <div class="form">
+            <form>
+                <label for="p-one">Player's Name</label><br>
+                <input type="text" id="p-one" name="p-one"><br>
+                <div class="multi-form">
+                    <label for="p-two">Player Two's Name</label><br>
+                    <input type="text" id="p-two" name="p-two" value="AI"><br>
+                </div>
+                <input type="button" class="submit-form" 
+                name="btn" value="Play">
+            </form>
+        </div>
+        
+    </div>
+<div class="game">
+<div class="modal">
+    <p class="modal-content"></p>
+    <button id="close-modal">Close</button>
+</div>
+
+<div class="scoreboard">
+    <div>
+        <p class="player-one">Player One</p>
+        <p id="one_wins">0</p>
+    </div>
+    <div>
+        <p class="player-two">Player Two</p> 
+        <p id="two_wins">0</p>
+    </div>
+    <div>
+        <p>Ties </p>
+        <p id="ties">0</p>
+    </div>
+    
+    
+</div>
+<div id="gameboard">
+    <div class="square top left"></div>
+    <div class="square top center"></div>
+    <div class="square top right"></div>
+    <div class="square middle left"></div>
+    <div class="square middle center"></div>
+    <div class="square middle right"></div>
+    <div class="square bottom left"></div>
+    <div class="square bottom center"></div>
+    <div class="square bottom right"></div>
+</div>
+
+<button id="reset">Reset Board</button>
+<button id="new">New Game</button>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
+</DOCTYPE>
