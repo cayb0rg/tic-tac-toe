@@ -72,7 +72,13 @@ const Game = (() => {
     
         for (var i = 0; i < currentBoard.length; i++) {
             for (var j = 0; j < currentBoard[0].length; j++) {
-                domBoard[i][j].textContent = currentBoard[i][j];
+                if (currentBoard[i][j] == 'X') {
+                    domBoard[i][j].style.backgroundImage = 'url(./images/X.png)';
+                } else  if (currentBoard[i][j] == 'O') {
+                    domBoard[i][j].style.backgroundImage = 'url(./images/O.png)';
+                } else {
+                    domBoard[i][j].style.backgroundImage = 'none';
+                }
             }
         }
     }
@@ -202,6 +208,12 @@ const Game = (() => {
         renderBoard();
     }
 
+    const refresh = () => {
+        newGame();
+        document.querySelector('.choose-mode').style.display = 'inline-block';
+        document.querySelector('.game').style.display = 'none';
+    }
+
     const newGame = () => {
         resetBoard();
         PlayerOne.setWins(0);
@@ -222,7 +234,7 @@ const Game = (() => {
         difficulty = bool;
     }
 
-    return {playerTurn, checkForWin, computerTurn, resetBoard, newGame, endRound, setDifficulty, isTerminal}
+    return {playerTurn, checkForWin, computerTurn, resetBoard, newGame, endRound, setDifficulty, isTerminal, refresh}
 
 })();
 
@@ -238,6 +250,10 @@ document.getElementById('reset').addEventListener('click', () => {
 
 document.getElementById('new').addEventListener('click', () => {
     Game.newGame()
+});
+
+document.getElementById('refresh').addEventListener('click', () => {
+    Game.refresh()
 });
 
 document.getElementById('close-modal').addEventListener('click', () => {
@@ -292,7 +308,7 @@ const domBoard = [document.querySelectorAll('.top'), document.querySelectorAll('
 for (let i = 0; i < domBoard.length; i++) {
     for (let j = 0; j < domBoard[i].length; j++) {
         domBoard[i][j].addEventListener('click', (e) => {
-            if (e.target.textContent == '') { // Check if space is empty
+            if (e.target.style.backgroundImage == '' || e.target.style.backgroundImage == 'none' && Game.checkForWin()[0] == false) { // Check if space is empty and game is not over
                 if (numOfPlayers > 1) {
                     Game.playerTurn([i,j], turn);
                     turn = !turn;

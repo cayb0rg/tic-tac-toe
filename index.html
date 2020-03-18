@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Baloo|Baloo+Bhaina|Open+Sans|Fredoka+One&display=swap' rel='stylesheet'>
 </head>
 <body>
     <h1 class="title">Tic Tac Toe</h1>
     <div class="start">
         <div class="choose-mode">
-            <p>Choose Mode</p>
-            <button id="single">Single Player</button>
-            <button id="multi">Multiplayer</button>
+            <h2>Choose Mode</h2>
+            <div class="button-wrapper">
+                <button id="single">Single Player</button>
+            </div>
+            <div class="button-wrapper">
+                <button id="multi">Multiplayer</button>
+
+            </div>
         </div>
         <div class="choose-difficulty">
-            <p>Choose Difficulty</p>
-            <button id="easy">Easy</button>
-            <button id="hard">Impossible</button>
+            <h2>Choose Difficulty</h2>
+            <div class="button-wrapper">
+                <button id="easy">Easy</button>
+            </div>
+            <div class="button-wrapper">
+                <button id="hard">Impossible</button>
+            </div>
+            
         </div>
         <div class="form">
             <form>
@@ -53,20 +64,33 @@
     
     
 </div>
-<div id="gameboard">
-    <div class="square top left"></div>
-    <div class="square top center"></div>
-    <div class="square top right"></div>
-    <div class="square middle left"></div>
-    <div class="square middle center"></div>
-    <div class="square middle right"></div>
-    <div class="square bottom left"></div>
-    <div class="square bottom center"></div>
-    <div class="square bottom right"></div>
+<div class="gameboard-wrapper">
+
+    <div id="gameboard">
+        <div class="square top left"></div>
+        <div class="square top center"></div>
+        <div class="square top right"></div>
+        <div class="square middle left"></div>
+        <div class="square middle center"></div>
+        <div class="square middle right"></div>
+        <div class="square bottom left"></div>
+        <div class="square bottom center"></div>
+        <div class="square bottom right"></div>
+    </div>
 </div>
 
-<button id="reset">Reset Board</button>
-<button id="new">New Game</button>
+<div class="menu">
+    <div class="button-wrapper">
+        <button id="reset">Clear Board</button>
+    </div>
+    <div class="button-wrapper">
+        <button id="new">Restart Game</button>
+    </div>
+    <div class="button-wrapper">
+        <button id="refresh">New Game</button>
+    </div>
+</div>
+
 </div>
 
 <script src="index.js"></script>
