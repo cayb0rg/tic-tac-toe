@@ -26,17 +26,17 @@ const Game = (() => {
         let match = false;
         let winner = "";
         let board = currentBoard;
-    
+
         let rowMatch = false;
         for (let i = 0; i < 3; i++) { // row
-            
+
             if (board[i][0] == board[i][1] && board[i][0] == board[i][2] && board[i][0] !== "") {
                 rowMatch = true;
                 winner = board[i][0];
             }
             if (rowMatch) break;
         }
-    
+
         let colMatch = false;
         for (let i = 0; i< 3; i++ ){ // col
             if (board[0][i] == board[1][i] && board[2][i] == board[0][i] && board[0][i] !== "") {
@@ -45,31 +45,31 @@ const Game = (() => {
             }
             if (colMatch) break;
         }
-    
+
         let matchLeftDiag = false;
         if (board[1][1] == board[0][0] && board[0][0] !== "" && board[2][2] == board[0][0]) {
             matchLeftDiag = true;
             winner = board[0][0];
         }
-        
+
         let matchRightDiag = false;
         if (board[1][1] == board[0][2] && board[0][2] !== "" && board[2][0] == board[0][2]) {
             matchRightDiag = true;
             winner = board[1][1];
         }
-    
+
         if (matchRightDiag || matchLeftDiag || colMatch || rowMatch) {
             match = true;
         }
-    
+
         return [match, winner];
     }
-    
+
     // Parameter must be a two-dimensional array
     const renderBoard = () => {
-        
+
         const domBoard = [document.querySelectorAll('.top'), document.querySelectorAll('.middle'), document.querySelectorAll('.bottom')];
-    
+
         for (var i = 0; i < currentBoard.length; i++) {
             for (var j = 0; j < currentBoard[0].length; j++) {
                 if (currentBoard[i][j] == 'X') {
@@ -82,9 +82,9 @@ const Game = (() => {
             }
         }
     }
-    
+
     const minimax = (board, depth, isMaximizer) => {
-            
+
         let results = checkForWin();
         if (results[1] == "O") { // AI won
             return 100 - depth;
@@ -96,7 +96,7 @@ const Game = (() => {
             if (isMaximizer) {
                 // for each move in board, choose one with greatest value
                 let bestValue = -1000;
-    
+
                 for (let i=0; i<board.length; i++) {
                     for (let j=0; j<board[i].length; j++) {
                         if (board[i][j] == "") {
@@ -106,12 +106,12 @@ const Game = (() => {
                         }
                     }
                 }
-                
+
                 return bestValue;
             }
             else if (!isMaximizer) {
                 let bestValue = 1000;
-    
+
                 for (let i=0; i<board.length; i++) {
                     for (let j=0; j<board[i].length; j++) {
                         if (board[i][j] == "") {
@@ -125,14 +125,14 @@ const Game = (() => {
             }
         }
     }
-    
+
     const computerSmartTurn = () => {
         let board = currentBoard;
         let bestMove;
         let bestValue = -1000;
 
-        for (let i = 0; i<3; i++) { 
-            for (let j = 0; j<3; j++) { 
+        for (let i = 0; i<3; i++) {
+            for (let j = 0; j<3; j++) {
                 if (board[i][j] == "") {
                     board[i][j] = "O";
                     let value = minimax(board, 0, false);
@@ -145,7 +145,7 @@ const Game = (() => {
             }
         }
         if(bestMove != undefined) board[bestMove[0]][bestMove[1]] = "O";
-        renderBoard();           
+        renderBoard();
     }
 
     const isTerminal = (board) => {
@@ -157,7 +157,7 @@ const Game = (() => {
         }
         return true;
     }
-    
+
     // Takes position of player move as parameter
     const playerTurn = (position, turn) => {
         currentBoard[position[0]][position[1]] = turn ?  'X': 'O';
@@ -177,15 +177,15 @@ const Game = (() => {
 
         do {
             randomMove = [Math.floor(Math.random()*currentBoard.length), Math.floor(Math.random()*currentBoard[0].length)];
-        } 
+        }
         while (currentBoard[randomMove[0]][randomMove[1]] != '');
 
         currentBoard[randomMove[0]][randomMove[1]] = 'O';
 
         renderBoard();
-        
+
     }
-    
+
     const endRound = (winner) => {
         const modalContent = document.querySelector('.modal-content');
         if (winner == "X") {
@@ -200,7 +200,7 @@ const Game = (() => {
         }
 
         renderScore();
-        
+
     }
 
     const resetBoard = () => {
@@ -219,6 +219,7 @@ const Game = (() => {
         PlayerOne.setWins(0);
         PlayerTwo.setWins(0);
         numOfTies = 0;
+        turn = true;
         renderScore();
     }
 
@@ -289,6 +290,7 @@ document.getElementById('hard').addEventListener('click', () => {
 document.getElementById('multi').addEventListener('click', () => {
     document.querySelector('.choose-mode').style.display = 'none';
     document.querySelector('.form').style.display = 'inline-block';
+    document.querySelector('.multi-form').style.display = 'inline-block';
     numOfPlayers = 2;
 })
 
@@ -318,7 +320,7 @@ for (let i = 0; i < domBoard.length; i++) {
                         Game.computerTurn();
                     }
                 }
-                
+
                 if (Game.checkForWin()[0] == true) {
                     Game.endRound(Game.checkForWin()[1]);
                     document.querySelector('.modal').classList.add('open-modal')
@@ -326,7 +328,7 @@ for (let i = 0; i < domBoard.length; i++) {
                     Game.endRound('tie');
                     document.querySelector('.modal').classList.add('open-modal');
                 }
-                
+
             }
         })
     }
